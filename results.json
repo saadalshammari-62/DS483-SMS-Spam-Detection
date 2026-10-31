@@ -1,0 +1,952 @@
+{
+ "data": {
+  "raw_messages": 5574,
+  "exact_duplicates": 403,
+  "kept": 5171,
+  "ham": 4518,
+  "spam": 653,
+  "train": 3619,
+  "val": 776,
+  "test": 776,
+  "spam_ratio_train": 0.1263,
+  "spam_ratio_test": 0.1263
+ },
+ "eda_feature_means": {
+  "ham": {
+   "chars": 70.895,
+   "words": 14.233,
+   "digits": 0.297,
+   "upper_ratio": 0.057,
+   "has_url": 0.003,
+   "has_money": 0.004,
+   "has_long_num": 0.001,
+   "exclaim": 0.178
+  },
+  "spam": {
+   "chars": 137.711,
+   "words": 23.74,
+   "digits": 15.489,
+   "upper_ratio": 0.11,
+   "has_url": 0.178,
+   "has_money": 0.332,
+   "has_long_num": 0.737,
+   "exclaim": 0.698
+  }
+ },
+ "eda_top_words_no_stopwords": {
+  "ham": [
+   [
+    "u",
+    938
+   ],
+   [
+    "get",
+    301
+   ],
+   [
+    "gt",
+    288
+   ],
+   [
+    "lt",
+    287
+   ],
+   [
+    "ok",
+    256
+   ],
+   [
+    "go",
+    248
+   ],
+   [
+    "got",
+    228
+   ],
+   [
+    "know",
+    226
+   ],
+   [
+    "like",
+    224
+   ],
+   [
+    "good",
+    217
+   ],
+   [
+    "come",
+    215
+   ],
+   [
+    "ur",
+    203
+   ]
+  ],
+  "spam": [
+   [
+    "call",
+    322
+   ],
+   [
+    "free",
+    197
+   ],
+   [
+    "p",
+    158
+   ],
+   [
+    "u",
+    157
+   ],
+   [
+    "txt",
+    141
+   ],
+   [
+    "ur",
+    119
+   ],
+   [
+    "stop",
+    116
+   ],
+   [
+    "mobile",
+    111
+   ],
+   [
+    "text",
+    109
+   ],
+   [
+    "claim",
+    96
+   ],
+   [
+    "reply",
+    96
+   ],
+   [
+    "www",
+    83
+   ]
+  ]
+ },
+ "preprocessing_ablation": [
+  {
+   "variant": "lower + punctuation only",
+   "vocab_size": 6276,
+   "cv_f1_mean": 0.9442,
+   "cv_f1_std": 0.0094
+  },
+  {
+   "variant": "+ stop-word removal",
+   "vocab_size": 6134,
+   "cv_f1_mean": 0.9228,
+   "cv_f1_std": 0.0079
+  },
+  {
+   "variant": "+ stemming",
+   "vocab_size": 5206,
+   "cv_f1_mean": 0.9461,
+   "cv_f1_std": 0.0114
+  },
+  {
+   "variant": "+ stop-words + stemming",
+   "vocab_size": 5096,
+   "cv_f1_mean": 0.925,
+   "cv_f1_std": 0.0064
+  }
+ ],
+ "preprocessing_selected": "+ stemming",
+ "preprocessing_examples": [
+  {
+   "label": "spam",
+   "original": "1000's of girls many local 2 u who r virgins 2 this & r ready 2 4fil ur every sexual need. Can u 4fil theirs? text CUTE to 69911(£1.50p. m)",
+   "after preprocessing": "numtok s of girl mani local numtok u who r virgin numtok thi r readi numtok fil ur everi sexual need can u fil their text cute to phonetok moneytok p m"
+  },
+  {
+   "label": "spam",
+   "original": "PRIVATE! Your 2003 Account Statement for shows 800 un-redeemed S.I.M. points. Call 08718738001 Identifier Code: 49557 Expires 26/11/04",
+   "after preprocessing": "privat your numtok account statement for show numtok un redeem s i m point call phonetok identifi code phonetok expir numtok numtok numtok"
+  },
+  {
+   "label": "spam",
+   "original": "http//tms. widelive.com/index. wml?id=820554ad0a1705572711&first=true¡C C Ringtone¡",
+   "after preprocessing": "http tm urltok wml id ad a first true c c rington"
+  },
+  {
+   "label": "ham",
+   "original": "Ah you see. You have to be in the lingo. I will let you know wot on earth it is when has finished making it!",
+   "after preprocessing": "ah you see you have to be in the lingo i will let you know wot on earth it is when ha finish make it"
+  },
+  {
+   "label": "ham",
+   "original": "We spend our days waiting for the ideal path to appear in front of us.. But what we forget is.. \"paths are made by walking.. not by waiting..\" Goodnight!",
+   "after preprocessing": "we spend our day wait for the ideal path to appear in front of us but what we forget is path are made by walk not by wait goodnight"
+  },
+  {
+   "label": "ham",
+   "original": "Package all your programs well",
+   "after preprocessing": "packag all your program well"
+  }
+ ],
+ "task2_top_tfidf_terms": {
+  "spam": [
+   [
+    "phonetok",
+    0.1161
+   ],
+   [
+    "numtok",
+    0.1099
+   ],
+   [
+    "moneytok",
+    0.0869
+   ],
+   [
+    "call",
+    0.07
+   ],
+   [
+    "to",
+    0.0684
+   ],
+   [
+    "your",
+    0.0477
+   ],
+   [
+    "free",
+    0.0472
+   ],
+   [
+    "urltok",
+    0.0368
+   ],
+   [
+    "for",
+    0.0366
+   ],
+   [
+    "you",
+    0.0363
+   ]
+  ],
+  "ham": [
+   [
+    "you",
+    0.0447
+   ],
+   [
+    "to",
+    0.0333
+   ],
+   [
+    "the",
+    0.0272
+   ],
+   [
+    "it",
+    0.0264
+   ],
+   [
+    "me",
+    0.025
+   ],
+   [
+    "in",
+    0.0244
+   ],
+   [
+    "and",
+    0.0225
+   ],
+   [
+    "my",
+    0.0216
+   ],
+   [
+    "numtok",
+    0.0214
+   ],
+   [
+    "that",
+    0.0201
+   ]
+  ]
+ },
+ "task2_similarity_examples": [
+  {
+   "query": "Todays Voda numbers ending 5226 are selected to receive a ?350 award. If you hava a match please call 08712300220 quoting claim code 1131 standard rates app ",
+   "top": [
+    {
+     "cosine": 0.981,
+     "label": "spam",
+     "text": "Todays Voda numbers ending 7548 are selected to receive a $350 award. If you have a match please call 08712300220 quoting claim code 4041 standard rates app"
+    },
+    {
+     "cosine": 0.981,
+     "label": "spam",
+     "text": "Todays Voda numbers ending 1225 are selected to receive a £50award. If you have a match please call 08712300220 quoting claim code 3100 standard rates app "
+    },
+    {
+     "cosine": 0.873,
+     "label": "spam",
+     "text": "Phony £350 award - Todays Voda numbers ending XXXX are selected to receive a £350 award. If you have a match please call 08712300220 quoting claim code 3100 standard rates app"
+    },
+    {
+     "cosine": 0.84,
+     "label": "spam",
+     "text": "Todays Voda numbers ending with 7634 are selected to receive a £350 reward. If you have a match please call 08712300220 quoting claim code 7684 standard rates apply."
+    },
+    {
+     "cosine": 0.55,
+     "label": "spam",
+     "text": "todays vodafone numbers ending with 0089(my last four digits) are selected to received a £350 award. If your number matches please call 09063442151 to claim your £350 award"
+    }
+   ],
+   "shared_terms": [
+    [
+     "voda",
+     0.088
+    ],
+    [
+     "standard",
+     0.084
+    ],
+    [
+     "quot",
+     0.08
+    ],
+    [
+     "app",
+     0.077
+    ],
+    [
+     "match",
+     0.067
+    ]
+   ]
+  },
+  {
+   "query": "Dear Voucher Holder, 2 claim this weeks offer, at your PC go to http://www.e-tlp.co.uk/expressoffer Ts&Cs apply.2 stop texts txt STOP to 80062.",
+   "top": [
+    {
+     "cosine": 0.866,
+     "label": "spam",
+     "text": "Dear Voucher Holder, To claim this weeks offer, at your PC please go to http://www.wtlp.co.uk/text. Ts&Cs apply."
+    },
+    {
+     "cosine": 0.375,
+     "label": "spam",
+     "text": "Last chance 2 claim ur £150 worth of discount vouchers-Text YES to 85023 now!SavaMob-member offers mobile T Cs 08717898035. £3.00 Sub. 16 . Remove txt X or STOP"
+    },
+    {
+     "cosine": 0.374,
+     "label": "spam",
+     "text": "Dear Voucher holder Have your next meal on us. Use the following link on your pc 2 enjoy a 2 4 1 dining experiencehttp://www.vouch4me.com/etlp/dining.asp"
+    },
+    {
+     "cosine": 0.319,
+     "label": "spam",
+     "text": "Today's Offer! Claim ur £150 worth of discount vouchers! Text YES to 85023 now! SavaMob, member offers mobile! T Cs 08717898035. £3.00 Sub. 16 . Unsub reply X"
+    },
+    {
+     "cosine": 0.318,
+     "label": "spam",
+     "text": "+123 Congratulations - in this week's competition draw u have won the £1450 prize to claim just call 09050002311 b4280703. T&Cs/stop SMS 08718727868. Over 18 only 150ppm"
+    }
+   ],
+   "shared_terms": [
+    [
+     "holder",
+     0.118
+    ],
+    [
+     "pc",
+     0.099
+    ],
+    [
+     "ts",
+     0.095
+    ],
+    [
+     "appli",
+     0.069
+    ],
+    [
+     "voucher",
+     0.066
+    ]
+   ]
+  },
+  {
+   "query": "Awesome question with a cute answer: Someone asked a boy \"how is ur life?\" . . He smiled &amp; answered: . . \"She is fine!\" Gudnite",
+   "top": [
+    {
+     "cosine": 0.316,
+     "label": "spam",
+     "text": "Ur balance is now £500. Ur next question is: Who sang 'Uptown Girl' in the 80's ? 2 answer txt ur ANSWER to 83600. Good luck!"
+    },
+    {
+     "cosine": 0.202,
+     "label": "ham",
+     "text": "Could you not read me, my Love ? I answered you"
+    },
+    {
+     "cosine": 0.194,
+     "label": "ham",
+     "text": "Gudnite....tc...practice going on"
+    },
+    {
+     "cosine": 0.193,
+     "label": "ham",
+     "text": "Haven't heard anything and he's not answering my texts so I'm guessing he flaked. That said the jb is fantastic"
+    },
+    {
+     "cosine": 0.187,
+     "label": "ham",
+     "text": "So now my dad is gonna call after he gets out of work and ask all these crazy questions."
+    }
+   ],
+   "shared_terms": [
+    [
+     "answer",
+     0.172
+    ],
+    [
+     "question",
+     0.059
+    ],
+    [
+     "ur",
+     0.047
+    ],
+    [
+     "is",
+     0.038
+    ]
+   ]
+  }
+ ],
+ "task2_similarity_stats": {
+  "ham_ham": 0.019740949164026578,
+  "spam_spam": 0.08341721975502389,
+  "ham_spam": 0.019378117821434473
+ },
+ "task2_1nn_test": {
+  "accuracy": 0.9716494845360825,
+  "precision": 0.9318181818181818,
+  "recall": 0.8367346938775511,
+  "f1": 0.8817204301075269
+ },
+ "Naive Bayes": {
+  "metrics": {
+   "accuracy": 0.990979381443299,
+   "precision": 0.989247311827957,
+   "recall": 0.9387755102040817,
+   "f1": 0.9633507853403142,
+   "roc_auc": 0.9955300704352539,
+   "tn": 677,
+   "fp": 1,
+   "fn": 6,
+   "tp": 92
+  },
+  "false_positives": [
+   {
+    "text": "Unlimited texts. Limited minutes.",
+    "prob": 0.774
+   }
+  ],
+  "false_negatives": [
+   {
+    "text": "Would you like to see my XXX pics they are so hot they were nearly banned in the uk!",
+    "prob": 0.048
+   },
+   {
+    "text": "Burger King - Wanna play footy at a top stadium? Get 2 Burger King before 1st Sept and go Large or Super with Coca-Cola and walk out a winner",
+    "prob": 0.15
+   },
+   {
+    "text": "RCT' THNQ Adrian for U text. Rgds Vatian",
+    "prob": 0.319
+   },
+   {
+    "text": "Latest News! Police station toilet stolen, cops have nothing to go on!",
+    "prob": 0.045
+   },
+   {
+    "text": "Babe: U want me dont u baby! Im nasty and have a thing 4 filthyguys. Fancy a rude time with a sexy bitch. How about we go slo n hard! Txt XXX SLO(4msgs)",
+    "prob": 0.004
+   },
+   {
+    "text": "Oh my god! I've found your number again! I'm so glad, text me back xafter this msgs cst std ntwk chg £1.50",
+    "prob": 0.096
+   }
+  ],
+  "best_params": {
+   "clf__alpha": "0.05",
+   "tfidf__min_df": "1",
+   "tfidf__ngram_range": "(1, 2)"
+  },
+  "cv_f1": 0.9511888886565989,
+  "train_time_s": 18.32,
+  "latency_ms_per_msg": 0.1239,
+  "n_parameters": 69266
+ },
+ "Logistic Regression": {
+  "metrics": {
+   "accuracy": 0.9935567010309279,
+   "precision": 1.0,
+   "recall": 0.9489795918367347,
+   "f1": 0.9738219895287958,
+   "roc_auc": 0.996944795617362,
+   "tn": 678,
+   "fp": 0,
+   "fn": 5,
+   "tp": 93
+  },
+  "false_positives": [],
+  "false_negatives": [
+   {
+    "text": "Would you like to see my XXX pics they are so hot they were nearly banned in the uk!",
+    "prob": 0.014
+   },
+   {
+    "text": "Burger King - Wanna play footy at a top stadium? Get 2 Burger King before 1st Sept and go Large or Super with Coca-Cola and walk out a winner",
+    "prob": 0.051
+   },
+   {
+    "text": "Latest News! Police station toilet stolen, cops have nothing to go on!",
+    "prob": 0.009
+   },
+   {
+    "text": "Babe: U want me dont u baby! Im nasty and have a thing 4 filthyguys. Fancy a rude time with a sexy bitch. How about we go slo n hard! Txt XXX SLO(4msgs)",
+    "prob": 0.091
+   },
+   {
+    "text": "Oh my god! I've found your number again! I'm so glad, text me back xafter this msgs cst std ntwk chg £1.50",
+    "prob": 0.117
+   }
+  ],
+  "best_params": {
+   "clf__C": "100",
+   "clf__class_weight": "balanced",
+   "tfidf__min_df": "2",
+   "tfidf__ngram_range": "(1, 2)"
+  },
+  "cv_f1": 0.9588279742496241,
+  "train_time_s": 26.1,
+  "latency_ms_per_msg": 0.1046,
+  "n_parameters": 8644
+ },
+ "lr_top_features": {
+  "spam": [
+   [
+    "phonetok",
+    24.67
+   ],
+   [
+    "moneytok",
+    17.0
+   ],
+   [
+    "urltok",
+    15.69
+   ],
+   [
+    "repli",
+    10.28
+   ],
+   [
+    "txt",
+    10.11
+   ],
+   [
+    "to phonetok",
+    9.25
+   ],
+   [
+    "call phonetok",
+    8.37
+   ],
+   [
+    "text",
+    8.35
+   ],
+   [
+    "free",
+    7.87
+   ],
+   [
+    "tone",
+    7.46
+   ],
+   [
+    "mobil",
+    7.11
+   ],
+   [
+    "servic",
+    7.07
+   ]
+  ],
+  "ham": [
+   [
+    "my",
+    -5.18
+   ],
+   [
+    "me",
+    -4.03
+   ],
+   [
+    "gt",
+    -4.0
+   ],
+   [
+    "can",
+    -3.99
+   ],
+   [
+    "lt",
+    -3.88
+   ],
+   [
+    "at",
+    -3.72
+   ],
+   [
+    "that",
+    -3.62
+   ],
+   [
+    "lt gt",
+    -3.62
+   ],
+   [
+    "it",
+    -3.41
+   ],
+   [
+    "then",
+    -3.13
+   ],
+   [
+    "yup",
+    -2.75
+   ],
+   [
+    "oh",
+    -2.72
+   ]
+  ]
+ },
+ "BiLSTM": {
+  "metrics": {
+   "accuracy": 0.9845360824742269,
+   "precision": 0.9387755102040817,
+   "recall": 0.9387755102040817,
+   "f1": 0.9387755102040817,
+   "roc_auc": 0.9937390885557763,
+   "tn": 672,
+   "fp": 6,
+   "fn": 6,
+   "tp": 92
+  },
+  "false_positives": [
+   {
+    "text": "Have you laid your airtel line to rest?",
+    "prob": 0.8349999785423279
+   },
+   {
+    "text": "Glad to see your reply.",
+    "prob": 0.9340000152587891
+   },
+   {
+    "text": "Please protect yourself from e-threats. SIB never asks for sensitive information like Passwords,ATM/SMS PIN thru email. Never share your password with anybody.",
+    "prob": 0.9990000128746033
+   },
+   {
+    "text": "Please reserve ticket on saturday eve from chennai to thirunelvali and again from tirunelvali to chennai on sunday eve...i already see in net..no ticket available..i want to book ticket through tackle ..",
+    "prob": 0.9990000128746033
+   },
+   {
+    "text": "Hi! You just spoke to MANEESHA V. We'd like to know if you were satisfied with the experience. Reply Toll Free with Yes or No.",
+    "prob": 0.9990000128746033
+   },
+   {
+    "text": "Misplaced your number and was sending texts to your old number. Wondering why i've not heard from you this year. All the best in your mcat. Got this number from my atlanta friends",
+    "prob": 1.0
+   }
+  ],
+  "false_negatives": [
+   {
+    "text": "Would you like to see my XXX pics they are so hot they were nearly banned in the uk!",
+    "prob": 0.014000000432133675
+   },
+   {
+    "text": "RCT' THNQ Adrian for U text. Rgds Vatian",
+    "prob": 0.003000000026077032
+   },
+   {
+    "text": "Latest News! Police station toilet stolen, cops have nothing to go on!",
+    "prob": 0.01600000075995922
+   },
+   {
+    "text": "Check Out Choose Your Babe Videos @ sms.shsex.netUN fgkslpoPW fgkslpo",
+    "prob": 0.07500000298023224
+   },
+   {
+    "text": "Babe: U want me dont u baby! Im nasty and have a thing 4 filthyguys. Fancy a rude time with a sexy bitch. How about we go slo n hard! Txt XXX SLO(4msgs)",
+    "prob": 0.004000000189989805
+   },
+   {
+    "text": "Oh my god! I've found your number again! I'm so glad, text me back xafter this msgs cst std ntwk chg £1.50",
+    "prob": 0.006000000052154064
+   }
+  ],
+  "best_val_f1": 0.9591836734693877,
+  "history": [
+   {
+    "epoch": 1,
+    "train_loss": 0.8736435756741983,
+    "val_f1": 0.8148148148148148
+   },
+   {
+    "epoch": 2,
+    "train_loss": 0.3226573582708786,
+    "val_f1": 0.9253731343283582
+   },
+   {
+    "epoch": 3,
+    "train_loss": 0.2000734289440538,
+    "val_f1": 0.9538461538461539
+   },
+   {
+    "epoch": 4,
+    "train_loss": 0.13672218051473717,
+    "val_f1": 0.8468468468468469
+   },
+   {
+    "epoch": 5,
+    "train_loss": 0.10788927603596381,
+    "val_f1": 0.9047619047619048
+   },
+   {
+    "epoch": 6,
+    "train_loss": 0.061474461259763524,
+    "val_f1": 0.9547738693467337
+   },
+   {
+    "epoch": 7,
+    "train_loss": 0.04872898490747947,
+    "val_f1": 0.95
+   },
+   {
+    "epoch": 8,
+    "train_loss": 0.03447932034317105,
+    "val_f1": 0.94
+   },
+   {
+    "epoch": 9,
+    "train_loss": 0.03160398488601299,
+    "val_f1": 0.9405940594059405
+   },
+   {
+    "epoch": 10,
+    "train_loss": 0.024892807045051302,
+    "val_f1": 0.9591836734693877
+   },
+   {
+    "epoch": 11,
+    "train_loss": 0.019123986303836157,
+    "val_f1": 0.9238095238095239
+   },
+   {
+    "epoch": 12,
+    "train_loss": 0.028893653477863008,
+    "val_f1": 0.9543147208121827
+   },
+   {
+    "epoch": 13,
+    "train_loss": 0.018258103215307797,
+    "val_f1": 0.9441624365482234
+   },
+   {
+    "epoch": 14,
+    "train_loss": 0.02345397061807044,
+    "val_f1": 0.9489795918367347
+   }
+  ],
+  "train_time_s": 8.93,
+  "latency_ms_per_msg": 0.0773,
+  "n_parameters": 377421,
+  "vocab_size": 2923,
+  "max_len": 41
+ },
+ "word_shuffle_test": {
+  "Naive Bayes": {
+   "f1_original": 0.9633507853403142,
+   "f1_shuffled": 0.9574468085106383,
+   "drop": 0.0059039768296758055
+  },
+  "Logistic Regression": {
+   "f1_original": 0.9738219895287958,
+   "f1_shuffled": 0.96875,
+   "drop": 0.005071989528795839
+  },
+  "BiLSTM": {
+   "f1_original": 0.9387755102040817,
+   "f1_shuffled": 0.9381443298969072,
+   "drop": 0.0006311803071744615
+  }
+ },
+ "DistilBERT": {
+  "metrics": {
+   "accuracy": 0.990979381443299,
+   "precision": 0.989247311827957,
+   "recall": 0.9387755102040817,
+   "f1": 0.9633507853403142,
+   "roc_auc": 0.9965986394557823,
+   "tn": 677,
+   "fp": 1,
+   "fn": 6,
+   "tp": 92
+  },
+  "false_positives": [
+   {
+    "text": "Please protect yourself from e-threats. SIB never asks for sensitive information like Passwords,ATM/SMS PIN thru email. Never share your password with anybody.",
+    "prob": 0.8539999723434448
+   }
+  ],
+  "false_negatives": [
+   {
+    "text": "New Tones This week include: 1)McFly-All Ab.., 2) Sara Jorge-Shock.. 3) Will Smith-Switch.. To order follow instructions on next message",
+    "prob": 0.008999999612569809
+   },
+   {
+    "text": "Would you like to see my XXX pics they are so hot they were nearly banned in the uk!",
+    "prob": 0.03799999877810478
+   },
+   {
+    "text": "RCT' THNQ Adrian for U text. Rgds Vatian",
+    "prob": 0.004999999888241291
+   },
+   {
+    "text": "Latest News! Police station toilet stolen, cops have nothing to go on!",
+    "prob": 0.029999999329447746
+   },
+   {
+    "text": "Check Out Choose Your Babe Videos @ sms.shsex.netUN fgkslpoPW fgkslpo",
+    "prob": 0.10400000214576721
+   },
+   {
+    "text": "Babe: U want me dont u baby! Im nasty and have a thing 4 filthyguys. Fancy a rude time with a sexy bitch. How about we go slo n hard! Txt XXX SLO(4msgs)",
+    "prob": 0.00800000037997961
+   }
+  ],
+  "model_name": "distilbert-base-uncased",
+  "best_val_f1": 0.96875,
+  "history": [
+   {
+    "epoch": 1,
+    "train_loss": 0.2865218569252575,
+    "val_f1": 0.9142857142857143
+   },
+   {
+    "epoch": 2,
+    "train_loss": 0.07704930061615466,
+    "val_f1": 0.96875
+   },
+   {
+    "epoch": 3,
+    "train_loss": 0.04321075419211592,
+    "val_f1": 0.9393939393939394
+   }
+  ],
+  "train_time_s": 29.16,
+  "latency_ms_per_msg": 1.9667,
+  "n_parameters": 66955010,
+  "device": "cuda"
+ },
+ "comparison": {
+  "Naive Bayes": {
+   "accuracy": 0.99098,
+   "precision": 0.98925,
+   "recall": 0.93878,
+   "f1": 0.96335,
+   "roc_auc": 0.99553,
+   "fp": 1.0,
+   "fn": 6.0,
+   "train_time_s": 18.32,
+   "latency_ms_per_msg": 0.1239,
+   "parameters": 69266.0
+  },
+  "Logistic Regression": {
+   "accuracy": 0.99356,
+   "precision": 1.0,
+   "recall": 0.94898,
+   "f1": 0.97382,
+   "roc_auc": 0.99694,
+   "fp": 0.0,
+   "fn": 5.0,
+   "train_time_s": 26.1,
+   "latency_ms_per_msg": 0.1046,
+   "parameters": 8644.0
+  },
+  "BiLSTM": {
+   "accuracy": 0.98454,
+   "precision": 0.93878,
+   "recall": 0.93878,
+   "f1": 0.93878,
+   "roc_auc": 0.99374,
+   "fp": 6.0,
+   "fn": 6.0,
+   "train_time_s": 8.93,
+   "latency_ms_per_msg": 0.0773,
+   "parameters": 377421.0
+  },
+  "DistilBERT": {
+   "accuracy": 0.99098,
+   "precision": 0.98925,
+   "recall": 0.93878,
+   "f1": 0.96335,
+   "roc_auc": 0.9966,
+   "fp": 1.0,
+   "fn": 6.0,
+   "train_time_s": 29.16,
+   "latency_ms_per_msg": 1.9667,
+   "parameters": 66955010.0
+  }
+ },
+ "error_overlap": {
+  "all_models": 3,
+  "at_least_one": 15,
+  "hard_messages": [
+   {
+    "label": "spam",
+    "text": "Would you like to see my XXX pics they are so hot they were nearly banned in the uk!"
+   },
+   {
+    "label": "spam",
+    "text": "Latest News! Police station toilet stolen, cops have nothing to go on!"
+   },
+   {
+    "label": "spam",
+    "text": "Babe: U want me dont u baby! Im nasty and have a thing 4 filthyguys. Fancy a rude time with a sexy bitch. How about we go slo n hard! Txt XXX SLO(4msgs)"
+   }
+  ],
+  "per_model": {
+   "Naive Bayes": 7,
+   "Logistic Regression": 5,
+   "BiLSTM": 12,
+   "DistilBERT": 7
+  }
+ }
+}
